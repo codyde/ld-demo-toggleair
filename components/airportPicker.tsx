@@ -82,32 +82,33 @@ useEffect(() => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md text-black">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md text-black z-50">
       <motion.div
         key="airport-picker"
         initial={{  y: -800, opacity: 0, scale: 0.5 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: .25 }}
         ref={containerRef}
-        className="bg-white p-6 rounded-lg h-2/3 w-full xl:h-1/2 xl:w-1/2 overflow-scroll"
+        className="bg-ldgray p-6 rounded-lg h-2/3 w-full xl:h-2/3 xl:w-1/2 overflow-y-hidden"
       >
-       <h2 className="text-xl font-bold mb-4">Select an Airport</h2>
+       <h2 className="text-xl mb-4 text-white"><span className="border-b-4 border-ldblue">Search</span></h2>
         
         {/* Search input */}
+        <p className="text-sm pb-2 text-white">City or Airport Code</p>
         <input
-          className=" rounded p-2 w-full mb-4 border-b-2 border-red-600"
+          className=" rounded p-2 mb-4 border-2 shadow-2xl border-gray-500/40 w-2/3"
           placeholder="Search by city or airport code..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-
+        <div className="border-b-4 border-ldblue mb-2 text-white" />
         {filteredAirports.map((airport, index) => (
           <div
             key={index}
             onClick={() => handleSelect(airport)}
-            className="cursor-pointer text-black hover:bg-gray-200 p-2 rounded-md"
+            className="cursor-pointer text-white hover:text-ldblue hover:font-bold p-2 rounded-md"
           >
-            {airport.CityName}
+            {airport.CityName} ({airport.AirportCode})
           </div>
         ))}
       </motion.div>

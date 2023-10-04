@@ -15,6 +15,8 @@ const config: Config = {
       },
       backgroundColor:{
         "ldgray":"#212121",
+        "ldblue": "#405BFF",
+        "ldmidgray": "#6D6E71"
       },
     },
   },

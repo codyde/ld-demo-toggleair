@@ -7,13 +7,15 @@ export default function MyTrips() {
   const { bookedTrips, cancelTrip, setBookedTrips } = useContext(TripsContext);
   const [status, setStatus] = useState("Economy");
 
-  console.log(bookedTrips)
+  console.log(bookedTrips);
 
   const handleCancel = (index: any) => {
     // Maybe show a confirmation dialog here
     cancelTrip(index);
     // Remove the trip from the bookedTrips array
-    setBookedTrips(bookedTrips.filter((_: any, tripIndex: number) => tripIndex !== index));
+    setBookedTrips(
+      bookedTrips.filter((_: any, tripIndex: number) => tripIndex !== index)
+    );
   };
 
   const containerVariants = {
@@ -34,7 +36,17 @@ export default function MyTrips() {
 
   return (
     <div className="flex flex-col items-center min-h-screen py-2 bg-white">
-      <h1 className="text-6xl font-bold pb-12 text-black">My Trips</h1>
+      <div className="relative">
+        <img
+          src="/airportstatus.png"
+          alt="Airplane"
+          className="w-screen object-cover"
+        />
+        <h1 className="text-4xl lg:text-8xl font-bold pb-12 text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center shadow-lg">
+          My Trips
+        </h1>
+      </div>
+
       <motion.div
         className="w-2/3"
         variants={containerVariants}
@@ -43,20 +55,28 @@ export default function MyTrips() {
       >
         <AnimatePresence>
           {bookedTrips.map(
-            (trip: { id: number, from: string; to: string }, index: number) => (
+            (trip: { id: number; from: string; to: string }, index: number) => (
               <motion.div
                 key={trip.id}
-                className="w-full border-2 border-black/10 shadow-2xl rounded-2xl mb-4"
+                className="w-full border-2 border-black/10 shadow-2xl rounded-2xl mb-4 mt-8"
                 variants={childVariants}
                 initial="hidden"
-        animate="show"
-        exit="exit" // Add this line
+                animate="show"
+                exit="exit" // Add this line
               >
                 <div key={index} className="flex justify-between p-4">
                   <div className="flex flex-col text-black">
-                    <p className="text-2xl"><span className="font-bold">Confirmation Number:</span> {trip.id}</p>
-                    <p className="text-2xl"><span className="font-bold">Traveling from:</span> {trip.from}</p>
-                    <p className="text-2xl"><span className="font-bold">Destiation:</span> {trip.to}</p>
+                    <p className="text-2xl">
+                      <span className="font-bold">Confirmation Number:</span>{" "}
+                      {trip.id}
+                    </p>
+                    <p className="text-2xl">
+                      <span className="font-bold">Traveling from:</span>{" "}
+                      {trip.from}
+                    </p>
+                    <p className="text-2xl">
+                      <span className="font-bold">Destiation:</span> {trip.to}
+                    </p>
                   </div>
                   <div>
                     <p className="text-black text-2xl">Fare Type: {status}</p>
