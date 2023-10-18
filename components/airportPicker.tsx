@@ -30,6 +30,7 @@ const airportPicker: React.FC<AirportPickerProps> = ({
 
   async function getAirports() {
     const airports = await fetch("/api/airports");
+    console.log(airports)
     const airportsJson: Airport[] = await airports.json();
     setAirports(airportsJson);
     return airportsJson;
@@ -37,8 +38,8 @@ const airportPicker: React.FC<AirportPickerProps> = ({
 
   const filterAirports = debounce(() => {
     const filtered = airports.filter(airport =>
-      airport.CityName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      airport.AirportCode.toLowerCase().includes(searchTerm.toLowerCase())
+      airport.cityName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      airport.airportCode.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredAirports(filtered);
   }, 250);
@@ -73,10 +74,10 @@ useEffect(() => {
 
   const handleSelect = (airport: Airport) => {
     setSelectedAirport(airport);
-    if (activeField === "from" && airport.CityName !== toLocation) {
-      setFromLocation(airport.AirportCode);
-    } else if (activeField === "to" && airport.CityName !== fromLocation) {
-      setToLocation(airport.AirportCode);
+    if (activeField === "from" && airport.cityName !== toLocation) {
+      setFromLocation(airport.airportCode);
+    } else if (activeField === "to" && airport.cityName !== fromLocation) {
+      setToLocation(airport.airportCode);
     }
     setShowSearch(false);
   };
@@ -89,12 +90,12 @@ useEffect(() => {
         animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: .25 }}
         ref={containerRef}
-        className="bg-ldgray p-6 rounded-lg h-2/3 w-full xl:h-2/3 xl:w-1/2 overflow-y-hidden"
+        className="bg-white p-6 rounded-lg h-2/3 w-full xl:h-2/3 xl:w-1/2 overflow-y-hidden"
       >
-       <h2 className="text-xl mb-4 text-white"><span className="border-b-4 border-ldblue">Search</span></h2>
+       <h2 className="text-xl mb-4 text-black"><span className="border-b-4 border-ldblue">Search</span></h2>
         
         {/* Search input */}
-        <p className="text-sm pb-2 text-white">City or Airport Code</p>
+        <p className="text-sm pb-2 text-black">City or Airport Code</p>
         <input
           className=" rounded p-2 mb-4 border-2 shadow-2xl border-gray-500/40 w-2/3"
           placeholder="Search by city or airport code..."
@@ -106,9 +107,9 @@ useEffect(() => {
           <div
             key={index}
             onClick={() => handleSelect(airport)}
-            className="cursor-pointer text-white hover:text-ldblue hover:font-bold p-2 rounded-md"
+            className="cursor-pointer text-black hover:text-ldblue hover:font-bold p-2 rounded-md"
           >
-            {airport.CityName} ({airport.AirportCode})
+            {airport.cityName} ({airport.airportCode})
           </div>
         ))}
       </motion.div>

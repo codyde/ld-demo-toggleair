@@ -42,6 +42,7 @@ export default function MyTrips() {
           alt="Airplane"
           className="w-screen object-cover"
         />
+        <div className="absolute inset-0 bg-black opacity-50"></div>
         <h1 className="text-4xl lg:text-8xl font-bold pb-12 text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center shadow-lg">
           My Trips
         </h1>
