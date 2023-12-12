@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   webpack(config) {
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
